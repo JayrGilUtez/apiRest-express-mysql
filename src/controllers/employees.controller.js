@@ -4,6 +4,8 @@ import {pool} from '../db.js'
 export const getEmployees = async(req,res) => {
     const [rows] = await pool.query('SELECT * FROM employee');
     res.send(rows);
+    console.log(rows);
+    
     
 };
 // getEmployeeById
@@ -12,6 +14,8 @@ export const getEmployeeById = async(req,res) => {
     const [rows] = await pool.query('SELECT * FROM employee WHERE id = ?', [id]);
     if (rows.length > 0) {
         res.send(rows[0]);
+        console.log(rows[0]);
+        
     } else {
         res.status(404).send('Employee not found');
     }
@@ -31,6 +35,7 @@ export const createEmployee = async (req, res) => {
             department_id,
             salary
         });
+        console.log(rows);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error trying to create a new employee.');
